@@ -18,7 +18,7 @@ def generatre_refresh_token(id):
     token=jwt.encode({
         'id':id,
         'exp':expiresIn
-    },ACCESS_TOKEN_SECRET,algorithm='HS256')
+    },REFRESH_TOKEN_SECRET,algorithm='HS256')
     return token.decode('utf-8')
 
 def create_auth_token(id):

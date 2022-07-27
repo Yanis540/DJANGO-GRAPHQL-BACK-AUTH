@@ -4,6 +4,7 @@ from api.models import User
 from api.seriliazers import UserSerializer
 from django.contrib.auth.hashers import check_password,make_password
 from api.tokens import create_auth_token
+from api.middlwares.authMiddlware import refresh_middlware
 class UserMutation(ObjectType):
     login=Field(AuthType,args={
         'email':String(required=True),
@@ -28,3 +29,19 @@ class UserMutation(ObjectType):
             }
         except Exception as e: 
             raise Exception(e)
+    
+    
+    refresh=Field(AuthType)
+    @refresh_middlware
+    def resolve_refresh(parent,info):
+        user=info.context.user 
+        authInfos=create_auth_token(str(user._id))
+        accessToken=authInfos['accessToken']
+        refreshToken=authInfos['refreshToken']
+        expiresIn=authInfos['expiresIn']
+        return{
+            'user':user,
+            'accessToken':accessToken,
+            'refreshToken':refreshToken,
+            'expiresIn':expiresIn
+        }
