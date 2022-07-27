@@ -9,6 +9,8 @@ load_dotenv(dotenv_path)
 
 DB_URL=str(os.getenv('DB_URL'))
 DB_NAME=str(os.getenv('DB_NAME'))
+ACCESS_TOKEN_SECRET=str(os.getenv('ACCESS_TOKEN_SECRET'))
+REFRESH_TOKEN_SECRET=str(os.getenv('REFRESH_TOKEN_SECRET'))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent

@@ -22,3 +22,6 @@ class AuthType(ObjectType):
     accessToken=String()
     refreshToken=String()
     expiresIn=Int()
+    class Meta: 
+        model=User 
+        fields='__all__'
